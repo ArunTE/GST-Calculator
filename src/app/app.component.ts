@@ -114,4 +114,17 @@ export class AppComponent implements OnInit {
 
     return (changes_total / this.selectedProducts.length);
   }
+
+  reset() {
+    this.selectedProducts = [];
+    for (let i = 0; i < this.productList.length; i++) {
+      for (let j = 0; j < this.productList[i].data.length; j++) {
+        this.productList[i].data[j].selected = false;
+        this.productList[i].data[j]['current-spend'] = 0;
+        this.productList[i].data[j]['changes'] = 0;
+        this.productList[i].data[j]['budget-after-gst'] = 0;
+      }
+    }
+    this.gstAffects = false;
+  }
 }
