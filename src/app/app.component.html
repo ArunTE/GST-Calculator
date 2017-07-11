@@ -1,20 +1,165 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container-fluid text-center">
+  <div [ngClass]="{'container': true}">
+    <div [ngClass]="{
+                      'product-list-container-large': (selectedProducts.length === 0 && !gstAffects),
+                      'product-list-container-medium': selectedProducts.length > 0,
+                      'product-list-container-small': gstAffects,
+                      'text-left': true,
+                      'center-block': selectedProducts.length === 0,
+                      'pull-left': selectedProducts.length > 0}">
+      <h2>GST Rate Comparison</h2>
 
+      <section class="search-box">
+        <div class="form-group">
+          <div class="icon-addon addon-lg">
+            <input type="text" name="searchBox" placeholder="Search for an item or product" [(ngModel)]="searchTerm" class="form-control">
+            <label for="search" class="search-icon glyphicon glyphicon-search"></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-list">
+        <div class="category-section" *ngFor="let category of productList; let cIndex = index">
+          <div class="row">
+            <div class="col-md-8">{{category.title}}</div>
+            <div class="col-md-2 text-center" *ngIf="!gstAffects">Old Rate</div>
+            <div class="col-md-2 text-center" *ngIf="!gstAffects">GST Rate</div>
+          </div>
+          <div class="productContainer">
+            <div class="product" *ngFor="let item of category.data | filter: searchTerm; let iIndex=index">
+              <div class="row">
+                <div class="col-md-8">
+                  <span class="plus" (click)="selectItem(item['product-code'])">
+                    <i *ngIf="!item.selected" class="fa fa-2x fa-plus-square-o"></i>
+                    <i *ngIf="item.selected" class="fa fa-2x fa-check-square checkboxBlue"></i>
+                  </span>
+                  {{item['product-label']}}
+                </div>
+                <div class="col-md-2 text-center" *ngIf="!gstAffects">{{item['old-rate']}}%</div>
+                <div class="col-md-2 text-center" *ngIf="!gstAffects">
+                  <i class="fa fa-circle red" *ngIf="item['old-rate'] < item['gst-rate']"></i>
+                  <i class="fa fa-circle green" *ngIf="item['old-rate'] > item['gst-rate']"></i>
+                  {{item['gst-rate']}}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div [ngClass]="{
+                      'shortlist': !gstAffects,
+                      'shortlistGSTAffects': gstAffects,
+                      'product-list-container-small': !gstAffects,
+                      'product-list-container-large': gstAffects,
+                      'text-left': true,
+                      'pull-left': true
+                    }"
+         *ngIf="selectedProducts.length > 0">
+      <button  *ngIf="!gstAffects" class="btn btn-xlg btn-primary" (click)="gstAffects = !gstAffects">See how GST affects your budget</button>
+      <div class="gstAffectsHeader" *ngIf="gstAffects">
+        <div class="row">
+          <div class="col-md-10">
+            <h3>How GST affects your monthly budget</h3>
+          </div>
+
+          <div class="col-md-2">
+            <i class="text-muted fa fa-2x fa-close"></i>
+          </div>
+        </div>
+      </div>
+      <section class="product-list" *ngIf="!gstAffects">
+        <div class="category-section">
+          <div class="row">
+            <div class="col-md-8">Your Shortlist</div>
+            <div class="col-md-4 text-center">Current Spend</div>
+          </div>
+          <div class="productContainer">
+            <div class="product" *ngFor="let item of selectedProducts, let index=index">
+              <div class="row">
+                <div class="col-md-8" style="padding-left: 35px">
+                  {{item['product-label']}}
+                </div>
+                <div class="col-md-4 text-center">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-inr"></i></span>
+                    <input type="number" class="form-control" min="0" [(ngModel)]="item['current-spend']" placeholder="0.00">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="product text-center" style="font-size: 12px; padding: 25px">
+              <p class="text-muted">
+                Pick products from the left and add your current monthly spend on that item to see how GST affects your monthly budget
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-list" *ngIf="gstAffects">
+        <div class="category-section">
+          <div class="row">
+            <div class="col-md-4">Your Shortlist</div>
+            <div class="col-md-3 text-center">Current Budget</div>
+            <div class="col-md-3 text-center">Budget after GST</div>
+            <div class="col-md-2 text-center">Change</div>
+          </div>
+          <div class="productContainer" *ngIf="gstAffects">
+            <div class="product" *ngFor="let item of selectedProducts, let index=index">
+              <div class="row">
+                <div class="col-md-4" style="padding-left: 35px">
+                  {{item['product-label']}}
+                </div>
+
+                <div class="col-md-3 text-center">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-inr"></i></span>
+                    <input type="number" class="form-control" min="0" [(ngModel)]="item['current-spend']" placeholder="0.00">
+                  </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-inr"></i></span>
+                    <span>{{budgetAfterGst(index) | number : '1.2'}}</span>
+                  </div>
+                </div>
+
+                <div class="col-md-2 text-center">
+                  {{gstChanges(index) | number : '1.2'}}%
+                  <i class="fa fa-circle red" *ngIf="item['old-rate'] < item['gst-rate']"></i>
+                  <i class="fa fa-circle green" *ngIf="item['old-rate'] > item['gst-rate']"></i>
+                </div>
+              </div>
+            </div>
+            <div class="product text-center" style="padding: 25px">
+              <div class="row">
+                <div class="col-md-4 text-left">Total</div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-inr"></i></span>
+                    <span>{{currentBudgetTotal() | number: '1.2'}}</span>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-inr"></i></span>
+                    <span>{{budgetAfterGSTTotal() | number: '1.2'}}</span>
+                  </div>
+                </div>
+                <div class="col-md-2">{{changesAverage() | number: '1.2-2'}}</div>
+              </div>
+            </div>
+            <div class="product text-center" style="padding: 25px">
+              <p>
+                Looks like you would be spending <span class="red" style="font-size: 16px;">{{changesAverage() | number: '1.2-2'}} more</span> under GST than before.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

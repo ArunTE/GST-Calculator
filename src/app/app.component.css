@@ -1,0 +1,205 @@
+.container {
+  width: 1080px;
+}
+
+.product-list-container-medium {
+  width: 550px;
+}
+
+.product-list-container-large {
+  width: 650px;
+}
+
+.product-list-container-small {
+  width: 450px;
+}
+
+.red {
+  font-size: 10px;
+  color: red;
+}
+
+.green {
+  font-size: 10px;
+  color: green;
+}
+
+.checkboxBlue {
+  color: #5342e5 !important;
+}
+
+.btn-primary {
+  background-color: #5342e5 !important;
+  color: white;
+}
+
+.btn-xlg {
+  padding: 15px 0;
+  font-size: 18px;
+  width: 100%;
+}
+
+/*
+ * Search Box
+*/
+
+.search-box {
+  margin-top: 30px;
+}
+
+.input-group .icon-addon .form-control {
+  border-radius: 0;
+}
+
+.icon-addon {
+  position: relative;
+  color: #555;
+  display: block;
+}
+
+.icon-addon:after,
+.icon-addon:before {
+  display: table;
+  content: " ";
+}
+
+.icon-addon:after {
+  clear: both;
+}
+
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon,
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  font-size: 14px;
+  width: 20px;
+  margin-left: -2.5px;
+  text-align: center;
+  padding: 10px 0;
+  top: 1px
+}
+
+.icon-addon.addon-lg .form-control {
+  line-height: 1.33;
+  height: 56px;
+  font-size: 18px;
+  padding: 10px 16px 10px 40px;
+}
+
+.icon-addon.addon-sm .form-control {
+  height: 30px;
+  padding: 5px 10px 5px 28px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.icon-addon.addon-lg .fa,
+.icon-addon.addon-lg .glyphicon {
+  font-size: 18px;
+  margin-left: 0;
+  left: 11px;
+  top: 7px;
+}
+
+.icon-addon.addon-md .form-control,
+.icon-addon .form-control {
+  padding-left: 30px;
+  float: left;
+  font-weight: normal;
+}
+
+.icon-addon.addon-sm .fa,
+.icon-addon.addon-sm .glyphicon {
+  margin-left: 0;
+  font-size: 12px;
+  left: 5px;
+  top: -1px
+}
+
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon,
+.icon-addon .form-control:focus + .fa,
+.icon-addon:hover .fa {
+  color: #2580db;
+}
+
+.search-icon {
+  color: #a0a0a0;
+}
+/* End Search Box */
+
+/* Category & Product*/
+
+.category-section > .row {
+  margin: 40px 0 12px 0;
+  color: #707070;
+  font-weight: bold;
+}
+
+.productContainer {
+  border: 1px solid #f0f0f0;
+}
+
+.product {
+  background-color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  padding: 15px 0;
+  color: #000000;
+  font-size: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.plus {
+  margin: 15px 20px 0 20px;
+}
+
+.plus:hover {
+  cursor: pointer;
+}
+
+.plus > i {
+  color: #acacac;
+  vertical-align: middle;
+}
+
+/* End Category */
+
+
+/* Shortlist */
+.shortlist {
+  position: fixed;
+  top: 83px;
+  left: 850px;
+  margin-left: 50px;
+}
+
+.shortlistGSTAffects {
+  position: fixed;
+  top: 83px;
+  left: 700px;
+  margin-left: 50px;
+}
+
+.input-group .form-control:last-child,
+.input-group-addon:last-child,
+.input-group-btn:first-child>.btn-group:not(:first-child)>.btn,
+.input-group-btn:first-child>.btn:not(:first-child),
+.input-group-btn:last-child>.btn,
+.input-group-btn:last-child>.btn-group>.btn,
+.input-group-btn:last-child>.dropdown-toggle {
+  border: none;
+  width: 90%;
+  box-shadow: none;
+  border-bottom: 1px dashed #000;
+}
+
+.input-group-addon:first-child {
+  border: none;
+  color: #aaaaaa;
+  background-color: #ffffff;
+}
+/* End Shortlist */
