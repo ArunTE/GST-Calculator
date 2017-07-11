@@ -12,21 +12,21 @@
       <section class="search-box">
         <div class="form-group">
           <div class="icon-addon addon-lg">
-            <input type="text" name="searchBox" placeholder="Search for an item or product" [(ngModel)]="searchTerm" class="form-control">
-            <label for="search" class="search-icon glyphicon glyphicon-search"></label>
+            <input type="text" id="searchBox" name="searchBox" placeholder="Search for an item or product" [(ngModel)]="searchTerm" class="form-control">
+            <label for="searchBox" class="search-icon glyphicon glyphicon-search"></label>
           </div>
         </div>
       </section>
 
       <section class="product-list">
-        <div class="category-section" *ngFor="let category of productList; let cIndex = index">
+        <div class="category-section" *ngFor="let category of productList">
           <div class="row">
             <div class="col-md-8">{{category.title}}</div>
             <div class="col-md-2 text-center" *ngIf="!gstAffects">Old Rate</div>
             <div class="col-md-2 text-center" *ngIf="!gstAffects">GST Rate</div>
           </div>
           <div class="productContainer">
-            <div class="product" *ngFor="let item of category.data | filter: searchTerm; let iIndex=index">
+            <div class="product" *ngFor="let item of category.data | filter: searchTerm">
               <div class="row">
                 <div class="col-md-8">
                   <span class="plus" (click)="selectItem(item['product-code'])">
