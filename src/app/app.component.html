@@ -129,8 +129,8 @@
 
                 <div class="col-md-2 text-center">
                   {{gstChanges(index) | number : '1.2'}}%
-                  <i class="fa fa-circle red" *ngIf="item['old-rate'] < item['gst-rate']"></i>
-                  <i class="fa fa-circle green" *ngIf="item['old-rate'] > item['gst-rate']"></i>
+                  <i class="fa fa-circle red" *ngIf="item['current-spend'] < item['budget-after-gst']"></i>
+                  <i class="fa fa-circle green" *ngIf="item['current-spend'] > item['budget-after-gst']"></i>
                 </div>
               </div>
             </div>
