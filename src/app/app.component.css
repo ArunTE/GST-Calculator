@@ -1,9 +1,5 @@
-.container {
-  width: 1080px;
-}
-
 .product-list-container-medium {
-  width: 550px;
+  width: 580px;
 }
 
 .product-list-container-large {
@@ -171,16 +167,14 @@
 
 /* Shortlist */
 .shortlist {
-  position: fixed;
-  top: 83px;
-  left: 850px;
+  float: left;
+  margin-top: 83px;
   margin-left: 50px;
 }
 
 .shortlistGSTAffects {
-  position: fixed;
-  top: 83px;
-  left: 700px;
+  float: left;
+  margin-top: 83px;
   margin-left: 50px;
 }
 
