@@ -8,7 +8,7 @@ export class ProductListService {
   constructor(private http: Http) { }
 
   get () {
-    return this.http.get(`https://sheetsu.com/apis/v1.0/9258c5dc86bf`)
+    return this.http.get(`https://raw.githubusercontent.com/Shanmugapriya03/GST_Calculator/master/components/data.json`)
       .map((res: Response) => res.json());
   }
 
